@@ -1,41 +1,60 @@
+#!/usr/bin/env python3
+
+
 class Plant:
-    def __init__(self: "Plant", name: str, height: float, age: int) -> None:
-        self.name = name.capitalize()
-        self.height = round(height, 1)
-        self.age = age
-        self.start_height = round(height, 1)
+    """Encapsulated Plant class validating height and age inputs."""
 
-    def create_print_plant(self: "Plant") -> None:
-        print(f"Created: {self.name}: {self.height}cm, {self.age} days old")
+    def __init__(self, name: str, height: float, age: int) -> None:
+        self.name: str = name
+        self._height: float = 0.0
+        self._age: int = 0
 
-    def print_plant(self: "Plant") -> None:
-        print(f"{self.name}: {round(self.height, 1)}cm, {self.age} days old")
+        self.set_height(height)
+        self.set_age(age)
 
-    def grow_one_day(self: "Plant") -> None:
-        self.age += 1
-        if self.name.capitalize() == "Rose":
-            self.height = round(self.height + 0.8, 1)
-        elif self.name.capitalize() == "Sunflower":
-            self.height = round(self.height + 0.7, 1)
-        elif self.name.capitalize() == "Cactus":
-            self.height = round(self.height + 0.4, 1)
+    def get_height(self) -> float:
+        return self._height
+
+    def set_height(self, height: float) -> None:
+        if height < 0:
+            print(f"{self.name}: Error, height can't be negative")
+            print("Height update rejected")
         else:
-            self.height = round(self.height * 1.05, 1)
+            self._height = height
 
-    def weekly_growth(self: "Plant") -> None:
-        total_growth = round(self.height - self.start_height, 1)
-        print(f"Growth this week: {total_growth}cm")
+    def get_age(self) -> int:
+        return self._age
+
+    def set_age(self, age: int) -> None:
+        if age < 0:
+            print(f"{self.name}: Error, age can't be negative")
+            print("Age update rejected")
+        else:
+            self._age = age
+
+    def show(self) -> None:
+        print(f"{self.name}: {self._height:.1f}cm, {self._age} days old")
+
+
+def main() -> None:
+    print("=== Garden Security System ===")
+    rose = Plant("Rose", 15.0, 10)
+    print(f"Plant created: {rose.name}: {rose.get_height():.1f}cm, "
+          f"{rose.get_age()} days old")
+
+    rose.set_height(25.0)
+    print("Height updated: 25cm")
+
+    rose.set_age(30)
+    print("Age updated: 30 days")
+
+    # Intentos con valores inválidos
+    rose.set_height(-5.0)
+    rose.set_age(-10)
+
+    print(f"Current state: {rose.name}: {rose.get_height():.1f}cm, "
+          f"{rose.get_age()} days old")
 
 
 if __name__ == "__main__":
-    plant_1 = Plant("rose", 25.0, 30)
-    plant_2 = Plant("oak", 200.0, 365)
-    plant_3 = Plant("cactus", 5.0, 90)
-    plant_4 = Plant("sunflower", 80.0, 45)
-    plant_5 = Plant("cactus", 15.0, 120)
-    print("=== Plant Factory Output ===")
-    plant_1.create_print_plant()
-    plant_2.create_print_plant()
-    plant_3.create_print_plant()
-    plant_4.create_print_plant()
-    plant_5.create_print_plant()
+    main()
