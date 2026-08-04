@@ -2,10 +2,8 @@
 
 
 class Plant:
-    """Plant class with nested statistics tracking."""
 
     class Stats:
-        """Nested class for tracking execution statistics."""
 
         def __init__(self) -> None:
             self.grow_calls: int = 0
@@ -46,7 +44,6 @@ class Plant:
 
 
 class Flower(Plant):
-    """Flower class with bloom tracking."""
 
     def __init__(self, name: str, height: float, age: int, color: str) -> None:
         super().__init__(name, height, age)
@@ -66,7 +63,6 @@ class Flower(Plant):
 
 
 class Seed(Flower):
-    """Seed class inheriting from Flower, generating seeds upon blooming."""
 
     def __init__(self, name: str, height: float, age: int, color: str) -> None:
         super().__init__(name, height, age, color)
@@ -82,10 +78,8 @@ class Seed(Flower):
 
 
 class Tree(Plant):
-    """Tree class extending statistics for shade production."""
 
     class Stats(Plant.Stats):
-        """Extended stats tracking shade calls."""
 
         def __init__(self) -> None:
             super().__init__()
@@ -104,7 +98,6 @@ class Tree(Plant):
         self._stats = self.Stats()
 
     def produce_shade(self) -> None:
-        # Cast de la propiedad interna para tipado correcto de la métrica
         if isinstance(self._stats, Tree.Stats):
             self._stats.shade_calls += 1
         print(
@@ -118,7 +111,6 @@ class Tree(Plant):
 
 
 def display_plant_stats(plant: Plant) -> None:
-    """Standalone global function to print stats of any plant instance."""
     print(f"[statistics for {plant.name}]")
     plant._stats.display()
 
