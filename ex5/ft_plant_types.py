@@ -2,7 +2,6 @@
 
 
 class Plant:
-    """Base class for all plant types."""
 
     def __init__(self, name: str, height: float, age: int) -> None:
         self.name: str = name
@@ -20,7 +19,6 @@ class Plant:
 
 
 class Flower(Plant):
-    """Flower type with blooming mechanics."""
 
     def __init__(self, name: str, height: float, age: int, color: str) -> None:
         super().__init__(name, height, age)
@@ -40,7 +38,6 @@ class Flower(Plant):
 
 
 class Tree(Plant):
-    """Tree type with trunk diameter and shade mechanics."""
 
     def __init__(
         self, name: str, height: float, age: int, trunk_diameter: float
@@ -60,7 +57,6 @@ class Tree(Plant):
 
 
 class Vegetable(Plant):
-    """Vegetable type with nutrition mechanics tied to growth."""
 
     def __init__(
         self, name: str, height: float, age: int, harvest_season: str
@@ -86,7 +82,7 @@ class Vegetable(Plant):
 def main() -> None:
     print("=== Garden Plant Types ===")
     
-    print("\n=== Flower")
+    print("=== Flower")
     rose = Flower("Rose", 15.0, 10, "red")
     rose.show()
     print("[asking the rose to bloom]")
